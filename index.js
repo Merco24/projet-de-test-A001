@@ -26,6 +26,46 @@ e06.addEventListener("click", function () {
     }
     }while(num ==8);*/
 
+
+    //E07 Les fonctions
+
+const e07 = document.querySelector("#e07");
+e07.addEventListener("click", function () {
     
-    
-    
+    const test = Math.floor(Math.random()*10)
+    console.log(test)
+    for(let i=0; i<3; i++){
+    num = prompt("Enter the number: ")
+    if(num < test){
+        alert("Sorry! It's Superior")
+    }
+    else if(num > test){
+        alert("Sorry! It's Inferior")
+    }
+    else{
+        alert("Congratulation! It's true")
+        break
+    }
+    }
+
+});    
+/* Programme de test de nombre Premier
+function isPremier(n){
+    if(n<2){
+        return false
+    }
+    for(let i=n-1; i>1; i--){
+        if( n%i === 0){
+            return false
+        }
+    }
+    return true
+}
+console.log(isPremier(0))
+console.log(isPremier(1))
+console.log(isPremier(5))
+console.log(isPremier(19))
+console.log(isPremier(7))
+console.log(isPremier(7))
+console.log(isPremier(10))
+*/
