@@ -1,4 +1,5 @@
-//nombre mistere = 8
+//E06 Les Boucles
+//Touvre le nombre 8
 const e06 = document.querySelector("#e06");
 e06.addEventListener("click", function () {
     let num = 8
@@ -31,23 +32,137 @@ e06.addEventListener("click", function () {
 
 const e07 = document.querySelector("#e07");
 e07.addEventListener("click", function () {
-    
-    const test = Math.floor(Math.random()*10)
-    console.log(test)
-    for(let i=0; i<3; i++){
-    num = prompt("Enter the number: ")
-    if(num < test){
-        alert("Sorry! It's Superior")
-    }
-    else if(num > test){
-        alert("Sorry! It's Inferior")
-    }
-    else{
-        alert("Congratulation! It's true")
-        break
-    }
-    }
 
+    alert("Bienvenus!! Quels fonctions souhaitez-vous testé ?")
+    alert(`Faite un choix: \n 1: Le nombre Aléatoire\n 2: Es un Palindrome\n 3: Moyenne rang\n 4: Ocuurence des mots`)
+    const choix = prompt("Entrer votre choix: ") * 1
+
+    switch (choix) {
+        
+        case 1: //Le nombre aleatoire
+            const test = Math.floor(Math.random()*10) //Génération d'un nombre compris entre 0 et 10
+            console.log(test)
+            alert("Votre objectif est de trouver un nombre compris entre 0 et 10")
+            alert("Vous disposez de  trois tentatives!!")
+            for(let i=0; i<3; i++){
+                num = prompt("Entrer un nombre: ")
+                if(num < test){
+                alert("Désolé c'est Supérieur!!")
+                }
+                else if(num > test){
+            alert("Désolé c'est Inférieur!!")
+            }
+            else{
+            alert("Félicitation vous avez trouvé le nombre mystère!!")
+            break
+            }
+            }
+
+            break;
+
+        case 2: //Es un Palindrome ?
+            alert("Ici nous testerons si vos mots sont des palindromes")
+            const word = prompt("Entrer un mot: ")
+            isPalindrome(word)
+            function isPalindrome(words){
+                const letters = words.split('')
+                letters.reverse()
+                const revertWords = letters.join('')
+                if (revertWords.toUpperCase() === words.toUpperCase()) {
+                    alert("Ce nombre est un Palindrome!!")
+                } else {
+                    alert("Ce nombre n'est pas un Palindrome!!")
+                }
+            }
+
+            break;
+        case 3: //Moyenne, Rang élève
+            
+            const students = [
+                {
+                    name: 'Stella',
+                    notes: [12,8,9,14]
+                },
+                {
+                    name: 'Junior',
+                    notes: [13,6,15,8]
+                },
+                {
+                    name: 'Léila',
+                    notes: [12,7,14]
+                },
+                {
+                    name: 'Céline',
+                    notes: [16,12,7,6]
+                },
+                {
+                    name: 'Alex',
+                    notes: [15,5,8,14]
+                }
+            ]
+            const moyenne = (notes) =>{
+                let sum = 0
+                for (let note of notes) {
+                    sum = sum + note
+                }
+                return sum / notes.length
+            }
+            const compareStud = (a, b) =>{
+                return b.moyenne - a.moyenne
+            }
+            for(let student of students){
+                student.moyenne = moyenne(student.notes)
+                student.bestNote = Math.max(...student.notes)
+                student.worstNote = Math.min(...student.notes)
+            }
+            students.sort(compareStud) //Classeement du 1er au dernier
+            console.log(students)
+            const formatStud = (student) =>{
+                return `${student.name} avec une moyenne de ${student.moyenne} meilleure note ${student.bestNote} pire note ${student.worstNote}`
+            }
+            console.log(`Top 3 des étudiants
+            1: ${formatStud(students[0])}
+            2: ${formatStud(students[1])}
+            3: ${formatStud(students[2])}`)
+            //Affichage du Max et du Min
+
+            break;
+            
+            case 4: //Ocuurence des mots
+                const phrase = prompt("Entrer votre texte: ")
+                frequence = {}
+                const words = phrase.toLowerCase().replaceAll('?','').replaceAll(',','') //Elimination des caractères spéciaux
+                .replaceAll('!','').replaceAll('.','').replaceAll(';','').replaceAll(':','').replaceAll("'","").split(' ')
+                for(let word of words){ //Calcul des occurrences
+                    if(word !== ''){
+                        if(frequence[word]){
+                            frequence[word]++
+                        }
+                        else{
+                            frequence[word] = 1
+                        }
+                    }
+                }
+                const frequenceArray = []
+                for(let k in frequence){
+                    frequenceArray.push({ //Ajout des paramètres word et count
+                        word: k,
+                        count: frequence[k]
+                    })
+                }
+                frequenceArray.sort( (a, b) => b.count - a.count )
+                console.log(frequenceArray)
+                console.log(`Le top trois des mots les plus fréquents sont: 
+                "${frequenceArray[0].word} avec ${frequenceArray[0].count} occurrence",
+                 "${frequenceArray[1].word} avec ${frequenceArray[1].count} occurrence", 
+                 "${frequenceArray[2].word} avec ${frequenceArray[2].count} occurence"`)
+
+                break;
+        default:
+            alert("Entrer un nombre compris entre 1 et 5")
+            break;
+    }
+    console.log(students)
 });    
 /* Programme de test de nombre Premier
 function isPremier(n){
