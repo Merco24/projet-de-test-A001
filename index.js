@@ -184,3 +184,127 @@ console.log(isPremier(7))
 console.log(isPremier(7))
 console.log(isPremier(10))
 */
+
+//E09 E010 Les Classes
+
+const e09 = document.querySelector("#e09")
+e09.addEventListener("click", function (){
+    alert("Bienvenus dans l'onglets Classe")
+    alert(`Faite un choix: \n 1. Figure géometrrique\n 2. Bibliothèque`)
+    const choix = prompt('Entrer votre choix: ') * 1
+    switch(choix){
+        case 1: //Figure géométrique
+            class Rectangle {
+
+                constructor (width, height) {
+                    this.width = width
+                    this.height = height
+                }
+            
+                get perimeter (){
+                    return (this.width + this.height) * 2
+                }
+            
+                get isValid (){
+                    return this.height > 0 && this.width > 0
+                }
+        
+                isBiggerThan (object){
+                    return this.perimeter > object.perimeter
+                }
+            }
+        
+            class Square extends Rectangle{
+        
+                constructor(width){
+                    super (width, width)
+                }
+        
+            }
+            
+            const r = new Rectangle( -10,17)
+            console.log(r.perimeter)
+            console.log(r.isValid)
+            const r2 =new Rectangle(9, 17)
+            console.log(r2.perimeter)
+            console.log(r2.isValid)
+            const c = new Square(12)
+            console.log(c.perimeter)
+            console.log(c.isValid)
+            console.log(r.isBiggerThan(c)) // Es ce que r est supérieur à c
+            alert('Finiish')
+            break;
+
+        case 2: //Bilbliotheque  
+        class Book {
+            #book = 1
+
+            constructor (title, size){
+                this.title  = title
+                this.size  = size
+            }
+
+            get page(){
+                return this.#book
+            }
+
+            nextPage(){
+                if(this.#book < this.size){
+                    this.#book++
+                }
+                else{
+                    console.log(`Désolé la dernière page est ${this.size}`)
+                }
+            }
+            close(){
+                this.#book = 1
+            }
+        }
+        class Library{
+            #book = []
+
+            addBook (book){
+                this.#book.push(book)
+            }
+
+            addBooks (books){
+                for(let book of books){
+                    this.addBook(book)
+                }
+            }
+
+            findBookbyLetter (letter){
+                const bookR = []
+                for(let book of this.#book){
+                    if(book.title[0].toLowerCase() === letter.toLowerCase()){
+                        bookR.push(book)
+                    }
+                }
+                return bookR
+            }
+        }
+        const b1 = new Book("Saison blanche et sèche", 4)
+        console.log(b1)
+        console.log(b1.page)
+        b1.nextPage()
+        console.log(b1.page)
+        b1.close()
+        console.log(b1.page)
+
+        const l1 = new Library()
+        l1.addBook(b1)
+        l1.addBooks([
+            new Book("Seigeur des aneaux", 13),
+            new Book("Vrai ou Faux", 20),
+            new Book("My Lirics", 8)
+        ])
+        console.log(l1.findBookbyLetter('S'))
+        alert('Finish')
+            break;
+            
+        default:
+            alert("Désolé veiller choisir un chiffre entre 1 et 2")
+            break;
+    }
+    
+})
