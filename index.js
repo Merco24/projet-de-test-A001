@@ -192,50 +192,70 @@ e09.addEventListener("click", function (){
     alert("Bienvenus dans l'onglets Classe")
     alert(`Faite un choix: \n 1. Figure géometrrique\n 2. Bibliothèque`)
     const choix = prompt('Entrer votre choix: ') * 1
-    switch(choix){
-        case 1: //Figure géométrique
-            class Rectangle {
-
-                constructor (width, height) {
-                    this.width = width
-                    this.height = height
-                }
+    if(choix == 1){
+        class Rectangle {
+            constructor (width, height) {
+                this.width = width
+                this.height = height
+            }
             
-                get perimeter (){
-                    return (this.width + this.height) * 2
-                }
+            get perimeter (){
+                return (this.width + this.height) * 2
+            }
             
-                get isValid (){
-                    return this.height > 0 && this.width > 0
-                }
+            get isValid (){
+                return this.height > 0 && this.width > 0
+            }
         
-                isBiggerThan (object){
-                    return this.perimeter > object.perimeter
+            isBiggerThan (object){
+                return this.perimeter > object.perimeter
+            }
+        }
+
+        class Square extends Rectangle{
+        
+            constructor(width){
+                super (width, width)
+            }
+    
+        }
+        
+        const r = new Rectangle( -10,17)
+        console.log(r.perimeter)
+        console.log(r.isValid)
+        const r2 =new Rectangle(9, 17)
+        console.log(r2.perimeter)
+        console.log(r2.isValid)
+        const c = new Square(12)
+        console.log(c.perimeter)
+        console.log(c.isValid)
+        console.log(r.isBiggerThan(c)) // Es ce que r est supérieur à c
+        alert('Finiish')
+    }
+    else if(choix == 2){
+        class Library {
+            #books = []
+        
+            addBook (book){
+                this.#books.push(book)
+            }
+        
+            addBooks (books){
+                for(let book of books){
+                    this.addBook(book)
                 }
             }
         
-            class Square extends Rectangle{
-        
-                constructor(width){
-                    super (width, width)
+            findBookbyLetter (letter){
+                const bookR = []
+                for(let book of this.#books){
+                    if(book.title[0].toLowerCase() === letter.toLowerCase()){
+                        bookR.push(book)
+                    }
                 }
-        
+                return bookR
             }
-            
-            const r = new Rectangle( -10,17)
-            console.log(r.perimeter)
-            console.log(r.isValid)
-            const r2 =new Rectangle(9, 17)
-            console.log(r2.perimeter)
-            console.log(r2.isValid)
-            const c = new Square(12)
-            console.log(c.perimeter)
-            console.log(c.isValid)
-            console.log(r.isBiggerThan(c)) // Es ce que r est supérieur à c
-            alert('Finiish')
-            break;
-
-        case 2: //Bilbliotheque  
+        }
         class Book {
             #book = 1
 
@@ -260,29 +280,7 @@ e09.addEventListener("click", function (){
                 this.#book = 1
             }
         }
-        class Library{
-            #book = []
-
-            addBook (book){
-                this.#book.push(book)
-            }
-
-            addBooks (books){
-                for(let book of books){
-                    this.addBook(book)
-                }
-            }
-
-            findBookbyLetter (letter){
-                const bookR = []
-                for(let book of this.#book){
-                    if(book.title[0].toLowerCase() === letter.toLowerCase()){
-                        bookR.push(book)
-                    }
-                }
-                return bookR
-            }
-        }
+        //Test
         const b1 = new Book("Saison blanche et sèche", 4)
         console.log(b1)
         console.log(b1.page)
@@ -300,11 +298,9 @@ e09.addEventListener("click", function (){
         ])
         console.log(l1.findBookbyLetter('S'))
         alert('Finish')
-            break;
-            
-        default:
-            alert("Désolé veiller choisir un chiffre entre 1 et 2")
-            break;
+    }
+    else {
+        console.log("Entrer un nombre compris entre 1 et 2")
     }
     
 })
